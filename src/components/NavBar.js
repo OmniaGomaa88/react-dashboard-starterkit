@@ -34,46 +34,63 @@ const NavBar = (props) => {
     }
 
     const logout = () => {
-        // todo use authcontext logout method
         toggleDrawer();
+        localStorage.removeItem('token');
+        store.user.dispatch({type: 'LOGOUT'}, store.user);
+        props.history.push('/');
     }
 
-    return (
-        <div>
-            <AppBar position="static" className={styles.header}>
-                <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
-                    <IconButton color="inherit" onClick={toggleDrawer}>
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6">
-                        React Dashboard
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                open={drawer}
-                onClose={toggleDrawer}
-                style={{ width: 600 }}
-                classes={{paper: styles.nav}}
-            >
-                <List style={{ background: store.theme.nav }}>
-                    <ListItem>
-                        <Link to="/">
-                            <Button color="secondary" onClick={logout}>
-                                <ExitToAppIcon /> Logout
-                            </Button>
-                        </Link>
-                    </ListItem>
-                    <ListItem>
-                        <Link to="/dashboard">
-                            <Button color="primary" onClick={toggleDrawer}>
-                                <DashboardIcon /> Dashboard
-                            </Button>
-                        </Link>
-                    </ListItem>
-                </List>
-            </Drawer>
-        </div>
-    );
+    if (store.user.isAuth) {
+        return (
+            <div>
+                <AppBar position="static" className={styles.header}>
+                    <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
+                        <IconButton color="inherit" onClick={toggleDrawer}>
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6">
+                            React Dashboard
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <Drawer
+                    open={drawer}
+                    onClose={toggleDrawer}
+                    style={{ width: 600 }}
+                    classes={{ paper: styles.nav }}
+                >
+                    <List style={{ background: store.theme.nav }}>
+                        <ListItem>
+                            <Link to="/">
+                                <Button color="secondary" onClick={logout}>
+                                    <ExitToAppIcon /> Logout
+                                </Button>
+                            </Link>
+                        </ListItem>
+                        <ListItem>
+                            <Link to="/dashboard">
+                                <Button color="primary" onClick={toggleDrawer}>
+                                    <DashboardIcon /> Dashboard
+                                </Button>
+                            </Link>
+                        </ListItem>
+                    </List>
+                </Drawer>
+            </div>
+        );
+    }
+    else {
+        return (
+            <div>
+                <AppBar position="static" className={styles.header}>
+                    <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
+                        <Typography variant="h6">
+                            React Dashboard
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+            </div>
+        );
+    }
 }
 export default withRouter(NavBar);

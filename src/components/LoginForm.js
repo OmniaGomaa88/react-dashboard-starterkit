@@ -2,28 +2,57 @@ import React, {useState, useContext} from 'react';
 import { Button, TextField } from '@material-ui/core';
 import useStyles from '../theme/forms.css';
 import { appStore } from '../store/';
+import {login} from '../services/';
+import Alert from '@material-ui/lab/Alert';
+import IconButton from '@material-ui/core/IconButton';
+import Collapse from '@material-ui/core/Collapse';
+import CloseIcon from '@material-ui/icons/Close';
 
 const LoginForm = (props) => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
     const store = useContext(appStore);
     const classes = useStyles();
 
 
     const handleClick = async (e) => {
-        console.log(username, password);
+        try {
+            const response = await login(username, password);
+            const token = response.data.token;
+            localStorage.setItem('token', token);
+            store.user.dispatch({
+                type: 'LOGIN',
+                payload: token
+            }, store.user);
+            props.history.push('/dashboard');
 
-        store.user.dispatch({
-            type: 'LOGIN', 
-            payload: "tokenblabli"
-        }, store.user);
+        } catch (error) {
+            setError(true);
+        }
     }
 
     
     return (
         <div>
+            {error && 
+            <Collapse in={error}>
+                <Alert
+                action={
+                    <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => {
+                        setError(false);
+                    }}
+                    >
+                    <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                }
+                severity="error">Identifiants incorrect</Alert>
+            </Collapse>}
             <div>
                 <div className={`wrapper ${classes.loginForm}`}>
                     <TextField
