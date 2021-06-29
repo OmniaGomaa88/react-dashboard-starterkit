@@ -32,6 +32,7 @@ class NavBar extends React.Component {
 
     logout = () => {
         // todo use authcontext logout method
+        localStorage.removeItem("token")
         this.toggleDrawer();
     }
 

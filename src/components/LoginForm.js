@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Button, TextField } from '@material-ui/core';
 import useStyles from '../theme/forms.css';
-
+import {login} from '../services/index.js'; 
 const LoginForm = (props) => {
 
     const [username, setUsername] = useState("");
@@ -10,6 +10,13 @@ const LoginForm = (props) => {
 
     const handleClick = async (e) => {
         console.log(username, password);
+        let response = await login(username, password);
+        // console.log(res);
+        if(response.data.success){
+            localStorage.setItem('token', response.data.token);
+           
+             props.history.push('/dashboard');
+            }
 
     }
 
