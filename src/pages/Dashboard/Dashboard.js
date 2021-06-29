@@ -3,11 +3,13 @@ import { useRef, useEffect, useState, useContext } from "react";
 import promoService from "../../services/promo";
 import formateurService from "../../services/formateur";
 import apprenantService from "../../services/apprenant";
+import salleService from "../../services/salle"
 
 const Dashboard = (props) => {
   const [promos, setPromos] = useState([]);
   const [Formateurs, setFormateurs] = useState([]);
   const [apprenants, setApprenant] = useState([]);
+  const [Salls, setSalls]=useState([])
   const [error, setError] = useState(false);
   const isInitialMount = useRef(true);
 
@@ -39,6 +41,15 @@ const Dashboard = (props) => {
       setError(true);
     }
   };
+  // function pour set salls
+  const getSalls = async () => {
+    try {
+      const sallsData = await salleService.getAll();
+      setSalls(sallsData.data);
+    } catch (error) {
+      setError(true);
+    }
+  };
 
   useEffect((props) => {
     getPromos();
@@ -49,6 +60,9 @@ const Dashboard = (props) => {
   useEffect((props) => {
     getApprenants();
   });
+  useEffect((props)=>{
+    getSalls()
+  })
  
 
   return (
@@ -70,6 +84,12 @@ const Dashboard = (props) => {
         <h1>les apprenants</h1>
         {apprenants.map((apprenant, index) => {
           return <li key={index}>{apprenant.firstname}</li>;
+        })}
+      </div>
+      <div>
+        <h1>les salls</h1>
+        {Salls.map((Sall, index) => {
+          return <li key={index}>{Sall.name}</li>;
         })}
       </div>
     </div>
