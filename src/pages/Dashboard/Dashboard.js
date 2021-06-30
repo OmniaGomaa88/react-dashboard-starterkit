@@ -18,6 +18,8 @@ import {
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
+import { display } from "@material-ui/system";
+import Forms from '../../components/forms'
 
 // créer des class
 
@@ -36,11 +38,14 @@ const useStyles = makeStyles({
   },
   cart: {
     display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-   
-
+    flexDirection: "column",
+ 
+    
   },
+  cartDetail:{
+    display: "flex", flexDirection: "column"
+   
+  }
 });
 
 const Dashboard = (props) => {
@@ -104,10 +109,11 @@ const Dashboard = (props) => {
   const classes = useStyles();
 
   return (
-    <Container style={{ display: "flex", flexDirection: "column" }}>
+    <div style={{display:"flex",flexDirection:"row",justifyContent:"space-evenly"}}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       {error && <p>{error}</p>}
       <List className={classes.cart}>
-        <div>
+        <div className={classes.cartDetail}>
           <Typography variant="h6" color="primary" className={classes.header}>
             LES PROMOS
           </Typography>
@@ -115,19 +121,25 @@ const Dashboard = (props) => {
           {promos.map((promo, index) => {
             return <ListItem key={index}>{promo.name}</ListItem>;
           })}
+        
         </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div className={classes.cartDetail}>
           <Typography variant="h6" color="primary" className={classes.header}>
             LES FORMATEURS
           </Typography>
           {Formateurs.map((formateur, index) => {
-            return <ListItem key={index}>{formateur.firstname}</ListItem>;
+            return <div key={index}>
+              
+              <p><strong>Frist Name: </strong> {formateur.firstname}</p>
+            
+             <p> <strong>last Name:</strong> {formateur.lastname}</p>
+              </div>;
           })}
         </div>
       </List>
 
       <List className={classes.cart}>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div className={classes.cartDetail}>
           <Typography variant="h6" color="primary" className={classes.header}>
             LES APPRENNANTS
           </Typography>
@@ -135,7 +147,7 @@ const Dashboard = (props) => {
             return <ListItem key={index}>{apprenant.firstname}</ListItem>;
           })}
         </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div className={classes.cartDetail} style={{marginBottom:"50%"}}>
           <Typography variant="h6" color="primary" className={classes.header}>
             LES SALLS
           </Typography>
@@ -144,7 +156,9 @@ const Dashboard = (props) => {
           })}
         </div>
       </List>
-    </Container>
+    </div>
+    <Forms></Forms>
+    </div>
   );
 };
 

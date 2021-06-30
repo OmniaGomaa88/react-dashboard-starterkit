@@ -6,6 +6,9 @@ const promoService = {
     },
     getById: async (id) => {
         return await api.get('/promos/' + id);
+    },
+     addPromo :async ( name) => {
+        return await api.post('/promos', {name});
     }
     // other service method
 }

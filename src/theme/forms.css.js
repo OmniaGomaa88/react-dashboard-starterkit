@@ -9,6 +9,41 @@ const useStyles = makeStyles((theme) =>
             alignItems: 'center',
             marginTop: theme.spacing(10)
         },
+        form:{
+            border:"2px solid blue",
+            width:"100%",
+            display: 'flex',
+            flexDirection: 'column',
+            float:"rigth",
+            marginTop:"5%"
+
+        },
+        header: {
+            backgroundColor: "#0F5298",
+            border: 0,
+            borderRadius: 3,
+            boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+            height: 48,
+            width: "300px",
+            color: "white",
+            paddingLeft: "4%",
+            paddingTop: "4%",
+            marginTop:"5%"
+          },
+          cart: {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-evenly",
+            
+          },
+          cartDetail:{
+            display: "flex", flexDirection: "column"
+          },
+          formTitle:{
+          fontSize:"20px",
+          color:"blue",
+          fontWidth:"bold"
+          }
     }),
 );
 
