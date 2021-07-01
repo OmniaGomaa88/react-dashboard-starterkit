@@ -41,8 +41,11 @@ const useStyles = makeStyles((theme) =>
           },
           formTitle:{
           fontSize:"20px",
-          color:"blue",
-          fontWidth:"bold"
+          color:"white",
+          fontWidth:"bold",
+          backgroundColor:"#0F5298",
+          boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+
           }
     }),
 );

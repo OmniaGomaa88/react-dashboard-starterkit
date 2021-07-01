@@ -19,34 +19,8 @@ import {
 import AddIcon from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { display } from "@material-ui/system";
-import Forms from '../../components/forms'
-
-// créer des class
-
-const useStyles = makeStyles({
-  header: {
-    backgroundColor: "#0F5298",
-    border: 0,
-    borderRadius: 3,
-    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
-    height: 48,
-    width: "300px",
-    color: "white",
-    paddingLeft: "4%",
-    paddingTop: "4%",
-    marginTop:"5%"
-  },
-  cart: {
-    display: "flex",
-    flexDirection: "column",
- 
-    
-  },
-  cartDetail:{
-    display: "flex", flexDirection: "column"
-   
-  }
-});
+import Forms from "../../components/forms";
+import useStyles from "../../theme/forms.css";
 
 const Dashboard = (props) => {
   const [promos, setPromos] = useState([]);
@@ -107,57 +81,79 @@ const Dashboard = (props) => {
     getSalls();
   }, []);
   const classes = useStyles();
-
+console.log(Salls)
   return (
-    <div style={{display:"flex",flexDirection:"row",justifyContent:"space-evenly"}}>
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      {error && <p>{error}</p>}
-      <List className={classes.cart}>
-        <div className={classes.cartDetail}>
-          <Typography variant="h6" color="primary" className={classes.header}>
-            LES PROMOS
-          </Typography>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        {error && <p>{error}</p>}
+        <List className={classes.cart}>
+          <div className={classes.cartDetail}>
+            <Typography variant="h6" color="primary" className={classes.header}>
+              LES PROMOS
+            </Typography>
 
-          {promos.map((promo, index) => {
-            return <ListItem key={index}>{promo.name}</ListItem>;
-          })}
-        
-        </div>
-        <div className={classes.cartDetail}>
-          <Typography variant="h6" color="primary" className={classes.header}>
-            LES FORMATEURS
-          </Typography>
-          {Formateurs.map((formateur, index) => {
-            return <div key={index}>
-              
-              <p><strong>Frist Name: </strong> {formateur.firstname}</p>
-            
-             <p> <strong>last Name:</strong> {formateur.lastname}</p>
-              </div>;
-          })}
-        </div>
-      </List>
+            {promos.map((promo, index) => {
+              return <ListItem key={index}>{promo.name}</ListItem>;
+            })}
+          </div>
+          <div className={classes.cartDetail}>
+            <Typography variant="h6" color="primary" className={classes.header}>
+              LES FORMATEURS
+            </Typography>
+            {Formateurs.map((formateur, index) => {
+              return (
+                <div key={index}>
+                  <p>
+                    <strong>Frist Name: </strong> {formateur.firstname}
+                  </p>
 
-      <List className={classes.cart}>
-        <div className={classes.cartDetail}>
-          <Typography variant="h6" color="primary" className={classes.header}>
-            LES APPRENNANTS
-          </Typography>
-          {apprenants.map((apprenant, index) => {
-            return <ListItem key={index}>{apprenant.firstname}</ListItem>;
-          })}
-        </div>
-        <div className={classes.cartDetail} style={{marginBottom:"50%"}}>
-          <Typography variant="h6" color="primary" className={classes.header}>
-            LES SALLS
-          </Typography>
-          {Salls.map((Sall, index) => {
-            return <ListItem key={index}>{Sall.name}</ListItem>;
-          })}
-        </div>
-      </List>
-    </div>
-    <Forms></Forms>
+                  <p>
+                    {" "}
+                    <strong>last Name:</strong> {formateur.lastname}
+                  </p>
+                  <p>
+                    {" "}
+                    <strong>stack:</strong> {formateur.stack}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </List>
+
+        <List className={classes.cart}>
+          <div className={classes.cartDetail}>
+            <Typography variant="h6" color="primary" className={classes.header}>
+              LES APPRENNANTS
+            </Typography>
+            {apprenants.map((apprenant, index) => {
+              return <ListItem key={index}>{apprenant.firstname}</ListItem>;
+            })}
+          </div>
+          <div className={classes.cartDetail} style={{ marginBottom: "50%" }}>
+            <Typography variant="h6" color="primary" className={classes.header}>
+              LES SALLS
+            </Typography>
+            {Salls.map((Salle, index) => {
+              return (
+                <ListItem key={index}>
+                 <p style={{marginLeft:"5%"}}><strong>Nom De salle:</strong>{Salle.name}</p> 
+                  <Button variant="contained" color="primary" href={'/salle/'+ Salle.id} >
+                    Voir le salle
+                  </Button>
+                </ListItem>
+              );
+            })}
+          </div>
+        </List>
+      </div>
+      <Forms></Forms>
     </div>
   );
 };

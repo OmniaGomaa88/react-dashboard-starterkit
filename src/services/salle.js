@@ -6,7 +6,9 @@ const salleService = {
     },
     getById: async (id) => {
         return await api.get('/salles/' + id);
-    }
+    },
+   
+
     // other service method
 }
 

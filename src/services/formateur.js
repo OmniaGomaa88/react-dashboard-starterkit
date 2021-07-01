@@ -6,6 +6,9 @@ const formateurService = {
     },
     getById: async (id) => {
         return await api.get('/formateurs/' + id);
+    },
+    addFormateur :async (fristName,lastName,stack) => {
+        return await api.post('/formateurs', {fristName,lastName,stack});
     }
     // other service method
 }
