@@ -27,7 +27,8 @@ const useStyles = makeStyles((theme) =>
             width: "300px",
             color: "white",
             paddingLeft: "4%",
-            paddingTop: "4%",
+            paddingTop: "3%",
+            paddingBottom: "3%",
             marginTop:"5%"
           },
           cart: {
