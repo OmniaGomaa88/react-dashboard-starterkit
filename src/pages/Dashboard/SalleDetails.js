@@ -14,13 +14,12 @@ import {
   Typography,
 } from "@material-ui/core";
 import useStyles from "../../theme/forms.css";
-import MaterialUIPickers from '../../components/FomReservation'
+import MaterialUIPickers from "../../components/FomReservation";
 
 const SalleDetail = (props) => {
   const [salle, setsalle] = useState([]);
   const [error, setError] = useState(false);
 
- 
   const id = props.match.params.id;
 
   const getSallById = async (props) => {
@@ -51,8 +50,7 @@ const SalleDetail = (props) => {
       </p>
       <h1 className={classes.formTitle}> Reserver une sale pour un promo </h1>
       <div className={`wrapper ${classes.form}`}>
-       
-      <MaterialUIPickers id={id}/>
+        <MaterialUIPickers id={id} />
       </div>
     </div>
   );
