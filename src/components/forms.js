@@ -5,22 +5,20 @@ import promoService from "../services/promo"
 import formateurService from "../services/formateur"
 import reservationService  from "../services/reservation";
 const Forms = (props) => {
-    
+    const[id,setId]=useState("")
     const [name, setName] = useState("");
     const [fristName, setFristName] = useState("");
     const [lastName, setLastName] = useState("");
     const [stack, setStack] = useState("");
-    // useSet Pour reservation
-    const[day, setDay]=useState("");
-    const[salleId, setSallId]=useState("");
-    const[promoId, setPromoId]=useState("");
+    
+    
     
 
    
   const [error, setError] = useState(null);
 
-  const handleClick = async (name) => {
-   await promoService.addPromo( name);
+  const handleClick = async (id,name) => {
+   await promoService.addPromo(id, name);
  
  
   };
@@ -30,10 +28,7 @@ const Forms = (props) => {
    
    
     };
-    // HndelClick function pour reservation
-    const handelClickResirv=async(day, salle_id, promo_id)=>{
-      await reservationService.addNew(day, salle_id, promo_id)
-    }
+   
   const classes = useStyles();
 
   return (
@@ -43,11 +38,17 @@ const Forms = (props) => {
         <h1 className={classes.formTitle}> AJOUTER PROMOS </h1>
         </div>
         <div className={`wrapper ${classes.form}`}>
+        <br />
+          <TextField
+            className="input"
+            label="promo Id"
+            onChange={(e) => setId(e.target.value)}
+          />
             
           <br />
           <TextField
             className="input"
-            label="name"
+            label="promo name"
             onChange={(e) => setName(e.target.value)}
           />
        
@@ -56,7 +57,7 @@ const Forms = (props) => {
           <Button
             variant="outlined"
             color="primary"
-            onClick={(event) => handleClick(name)}
+            onClick={(event) => handleClick(id,name)}
           >
             Submit
           </Button>

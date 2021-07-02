@@ -46,7 +46,13 @@ const useStyles = makeStyles((theme) =>
           backgroundColor:"#0F5298",
           boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
 
-          }
+          },
+          hide:{
+            display:"none"
+          },
+         apear:{
+           display:"block"
+         }
     }),
 );
 

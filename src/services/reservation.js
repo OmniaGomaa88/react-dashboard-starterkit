@@ -7,9 +7,10 @@ const reservationService = {
     getById: async (id) => {
         return await api.get('/reservations/' + id);
     },
-    addNew:async( day, salle_id, promo_id)=>{
-        return await api.add('/reservations',{ day, salle_id, promo_id})
-    }
+    addNew: async(day, id, promo_id)=>{
+        return await api.post('/reservations',{ day, salle_id: id, promo_id})
+    },
+  
     // other service method
 }
 

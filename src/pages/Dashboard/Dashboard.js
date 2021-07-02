@@ -28,7 +28,19 @@ const Dashboard = (props) => {
   const [apprenants, setApprenant] = useState([]);
   const [Salls, setSalls] = useState([]);
   const [error, setError] = useState(false);
+  const [clicked, setClicked] = useState(null);
   const isInitialMount = useRef(true);
+
+
+  // function HndelClick pour les header
+   const handleClick=(tabName)=>{
+     if(clicked==null){
+      setClicked(tabName)
+     }else{
+       setClicked(null)
+     }
+   
+   }
 
   // function de get Promos
   const getPromos = async () => {
@@ -81,7 +93,7 @@ const Dashboard = (props) => {
     getSalls();
   }, []);
   const classes = useStyles();
-console.log(Salls)
+  console.log(Salls);
   return (
     <div
       style={{
@@ -94,21 +106,29 @@ console.log(Salls)
         {error && <p>{error}</p>}
         <List className={classes.cart}>
           <div className={classes.cartDetail}>
-            <Typography variant="h6" color="primary" className={classes.header}>
+            <Typography variant="h6" color="primary" className={classes.header}
+             onClick={(event) => handleClick('promos')}
+            >
               LES PROMOS
             </Typography>
 
             {promos.map((promo, index) => {
-              return <ListItem key={index}>{promo.name}</ListItem>;
+              return (
+                <ListItem key={index} className={(clicked == 'promos') ? classes.apear: classes.hide}>
+                  {promo.name}
+                </ListItem>
+              );
             })}
           </div>
           <div className={classes.cartDetail}>
-            <Typography variant="h6" color="primary" className={classes.header}>
+            <Typography variant="h6" color="primary" className={classes.header}
+            onClick={(event) => handleClick('Formateur')}
+            >
               LES FORMATEURS
             </Typography>
             {Formateurs.map((formateur, index) => {
               return (
-                <div key={index}>
+                <div key={index} className={(clicked == 'Formateur') ? classes.apear: classes.hide}>
                   <p>
                     <strong>Frist Name: </strong> {formateur.firstname}
                   </p>
@@ -129,22 +149,39 @@ console.log(Salls)
 
         <List className={classes.cart}>
           <div className={classes.cartDetail}>
-            <Typography variant="h6" color="primary" className={classes.header}>
+            <Typography variant="h6" color="primary" className={classes.header}
+            onClick={(event) => handleClick('APPRENNANTS')}
+            >
               LES APPRENNANTS
             </Typography>
             {apprenants.map((apprenant, index) => {
-              return <ListItem key={index}>{apprenant.firstname}</ListItem>;
+              return (
+                <ListItem key={index} className={(clicked == 'APPRENNANTS') ? classes.apear: classes.hide}>
+                  {apprenant.firstname}
+                </ListItem>
+              );
             })}
           </div>
           <div className={classes.cartDetail} style={{ marginBottom: "50%" }}>
-            <Typography variant="h6" color="primary" className={classes.header}>
+            <Typography variant="h6" color="primary" className={classes.header}
+             onClick={(event) => handleClick('SALLS')}
+            >
               LES SALLS
             </Typography>
             {Salls.map((Salle, index) => {
               return (
-                <ListItem key={index}>
-                 <p style={{marginLeft:"5%"}}><strong>Nom De salle:</strong>{Salle.name}</p> 
-                  <Button variant="contained" color="primary" href={'/salle/'+ Salle.id} >
+                <ListItem key={index}
+                className={(clicked == 'SALLS') ? classes.apear: classes.hide} 
+                 >
+                  <p style={{ marginLeft: "5%" }}>
+                    <strong>Nom De salle:</strong>
+                    {Salle.name}
+                  </p>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    href={"/salle/" + Salle.id}
+                  >
                     Voir le salle
                   </Button>
                 </ListItem>

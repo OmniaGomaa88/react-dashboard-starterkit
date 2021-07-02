@@ -7,8 +7,8 @@ const promoService = {
     getById: async (id) => {
         return await api.get('/promos/' + id);
     },
-     addPromo :async ( name) => {
-        return await api.post('/promos', {name});
+     addPromo :async (id,name) => {
+        return await api.post('/promos', {id,name});
     }
     // other service method
 }
