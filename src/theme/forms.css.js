@@ -52,6 +52,11 @@ const useStyles = makeStyles((theme) =>
           },
          apear:{
            display:"block"
+         },
+         PromoTitle:{
+           fontSize:"40px",
+           color:"#0F5298",
+           textShadow:" 2px 4px rgba(255, 105,135, .3)"
          }
     }),
 );

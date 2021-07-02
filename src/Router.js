@@ -6,6 +6,7 @@ import { useState } from 'react';
 import {hasAuthenticated} from './services/Auth'
 import Auth from '../src/context/Auth'
 import AuthenticaRoute from './components/AuthenticatRoute';
+import PromoPage from './pages/promoPage'
 
 const AppRouter = () => {
     const [isAuthenticated,setIsAuthenticated]=useState(hasAuthenticated())
@@ -14,6 +15,9 @@ const AppRouter = () => {
         <Switch>
             <Route exact path='/' component={Login} />
             <AuthenticaRoute exact path="/salle/:id" component={SalleDetail}/>
+            <AuthenticaRoute exact path="/promo/:id" component={PromoPage}/>
+
+
             <AuthenticaRoute  path='/dashboard' component={Dashboard} />
 
         </Switch>

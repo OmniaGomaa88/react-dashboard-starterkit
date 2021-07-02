@@ -21,7 +21,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { display } from "@material-ui/system";
 import Forms from "../../components/forms";
 import useStyles from "../../theme/forms.css";
-
+import {Link} from 'react-router-dom'
 const Dashboard = (props) => {
   const [promos, setPromos] = useState([]);
   const [Formateurs, setFormateurs] = useState([]);
@@ -115,9 +115,9 @@ const Dashboard = (props) => {
             {promos.map((promo, index) => {
               return (
                 <ListItem key={index} className={(clicked == 'promos') ? classes.apear: classes.hide}>
-                  {promo.name}
+                <Link to={"/promo/" + promo.id}>{promo.name}</Link>  
                 </ListItem>
-              );
+              );s
             })}
           </div>
           <div className={classes.cartDetail}>
